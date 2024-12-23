@@ -304,7 +304,7 @@ def main(window):
                 break
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and player.jump_count < 2:
+                if event.key == pygame.K_UP and player.jump_count < 2:
                     player.jump()
 
 
