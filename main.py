@@ -1,23 +1,43 @@
 __author__ = "Ido Senn and the Roip team"
-
-import sys
+# Used this tutorial by TechWithTim as a base https://www.youtube.com/watch?v=6gLeplbqtqg
 
 from settings import *
 import sys
+import pygame as pg
+import random
+import math
+import os
+from os import listdir
+from os.path import isfile, join
+
+
+pg.init()
+WINDOW = pg.display.set_mode(RES)
+
+
+def get_background(name):
+    image = pg.image.load(join("assets", "Background", name))
+    _, _, width, height = image.get_rect()
+    tiles = []
+
+    for i in range(WINDOW_WIDTH // width + 1):
+        for j in range(WINDOW_HEIGHT // height + 1):
+            pos = i * width, j * height
+            tiles.append(pos)
+
+    return tiles, image
 
 
 class App:
     def __init__(self):
-        pg.init()
         pg.display.set_caption(WINDOW_CAPTION)
-        self.screen = pg.display.set_mode(RES)
         self.clock = pg.time.Clock()
 
     def update(self):
         self.clock.tick(FPS)
 
     def draw(self):
-        self.screen.fill(color=BG_COLOR)
+        WINDOW.fill(color=BG_COLOR)
         pg.display.flip()
 
     def check_events(self):
